@@ -26,13 +26,21 @@ const App = () => {
       .catch(err => {
         console.error(err);
         setLoading(false);
-        setError(err.message);
+
+        let { message } = err;
+
+        if (err.message.match(/failed to fetch/i)) {
+          message += '... Do you have Docker containers running?';
+        }
+
+        setError(message);
       });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input placeholder="Enter name" onChange={e => setValue(e.target.value)} value={value} />
+      <h2>Enter your name</h2>
+      <input placeholder="Your name here" onChange={e => setValue(e.target.value)} value={value} />
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {!loading && data && <pre>{data}</pre>}

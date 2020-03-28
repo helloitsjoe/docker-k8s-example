@@ -8,6 +8,9 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 
 module.exports = makeWebpackConfig({
   plugins: [htmlWebpackPlugin],
+  devServer: {
+    contentBase: './dist',
+  },
   resolve: {
     alias: {
       react: 'preact/compat',

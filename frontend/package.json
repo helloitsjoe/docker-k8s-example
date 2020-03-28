@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "watch": "webpack --watch --development",
+    "start": "webpack-dev-server --open",
     "build": "webpack --production"
   },
   "author": "",
@@ -25,6 +26,7 @@
     "jest": "^25.2.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
     "webpack-simple": "^1.5.2"
   },
   "dependencies": {
