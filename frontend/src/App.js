@@ -21,7 +21,7 @@ const App = () => {
     fetchData(value)
       .then(res => {
         setLoading(false);
-        setData(res);
+        setData(res.data);
       })
       .catch(err => {
         console.error(err);
