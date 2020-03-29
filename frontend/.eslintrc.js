@@ -1,3 +1,3 @@
 module.exports = {
-  extends: 'helloitsjoe'
-}
+  extends: 'helloitsjoe',
+};

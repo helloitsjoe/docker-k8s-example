@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: preact-frontend2
+spec:
+  containers:
+    - image: helloitsjoe/preact-frontend
+      name: preact-frontend
+      ports:
+        - containerPort: 80
