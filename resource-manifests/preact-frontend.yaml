@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: preact-frontend
+  labels:
+    app: preact-frontend
 spec:
   containers:
     - image: helloitsjoe/preact-frontend
