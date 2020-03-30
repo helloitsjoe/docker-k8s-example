@@ -1,26 +1,37 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 
 const app = express();
 
 const HOST = process.env.HOST || '0.0.0.0';
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
+const { SA_LOGIC_URL } = process.env;
 
 app.use(cors());
-// app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  const { query } = req;
-  console.log(`query:`, query);
-  if (!query.name) {
-    console.log(`fail!`);
-    res.status(400).send('Name is required');
-    res.end();
-    return;
+  const { sentence } = req.query;
+  console.log(`Sentence:`, sentence);
+
+  if (!sentence) {
+    console.warn(`No sentence provided!`);
+    return res.status(400).send({ message: 'Sentence is required' });
   }
-  console.log(`success!`);
-  res.status(200).send({ data: `Your name is ${query.name}` });
+
+  console.log('Analyzing sentiment...');
+  axios
+    .post(`${SA_LOGIC_URL}/analyse/sentiment`, { sentence })
+    .then(json => {
+      const { data } = json;
+      console.log('Analysis successful!', data);
+      res.status(200).send({ data });
+    })
+    .catch(err => {
+      console.error('Error!', err.toJSON());
+      res.status(500).send({ message: `[analysis] - ${err.message}` });
+    });
 });
 
 app.listen(PORT, () => {
