@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: preact-frontend
+spec:
+  selector:
+    matchLabels:
+      app: preact-frontend
+  replicas: 2
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: preact-frontend
+    spec:
+      containers:
+        - image: helloitsjoe/preact-frontend:1.0.0
+          imagePullPolicy: Always
+          name: preact-frontend
+          ports:
+            - containerPort: 80
