@@ -19,7 +19,7 @@ spec:
         app: preact-frontend
     spec:
       containers:
-        - image: helloitsjoe/preact-frontend:1.0.0
+        - image: helloitsjoe/preact-frontend:minikube
           imagePullPolicy: Always
           name: preact-frontend
           ports:

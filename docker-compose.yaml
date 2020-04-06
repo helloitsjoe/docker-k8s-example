@@ -1,0 +1,26 @@
+version: '2.0'
+
+services:
+  preact-frontend:
+    build:
+      context: ./frontend
+    image: helloitsjoe/preact-frontend:local
+    ports:
+      - '80:80'
+
+  node-server:
+    # Note: build: ./node-server is shorthand for build: context: ./node-server
+    build: ./node-server
+    image: helloitsjoe/node-server:local
+    ports:
+      - '8080:8080'
+    environment:
+      - SA_LOGIC_URL=http://sa-logic:5000
+    links:
+      - sa-logic
+
+  sa-logic:
+    build: ./sa-logic
+    image: helloitsjoe/sa-logic:local
+    ports:
+      - '5000:5000'
