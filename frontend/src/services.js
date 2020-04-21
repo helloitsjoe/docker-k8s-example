@@ -1,4 +1,4 @@
-const KUBE_NODE_URL = 'http://192.168.64.2:31577';
+const KUBE_NODE_URL = 'http://192.168.64.2:31979';
 const DOCKER_COMPOSE_URL = 'http://localhost:8080';
 const DOCKER_LOCAL_URL = 'http://localhost:5000';
 
