@@ -1,0 +1,18 @@
+# Note: This works both with 2 separate ingress configs
+# (front/backend), or with a single ingress for both.
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: sa-ingress-web-app
+  namespace: sentiment-analysis
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /sentiment
+            backend:
+              serviceName: node-server-lb
+              servicePort: 8080

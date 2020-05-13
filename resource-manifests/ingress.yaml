@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: sa-ingress
+  namespace: sentiment-analysis
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: frontend-lb
+              servicePort: 80
+          - path: /sentiment
+            backend:
+              serviceName: node-server-lb
+              servicePort: 8080
